@@ -7,8 +7,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => '/crud', 'as' => 'crud.'], function () {
-    Route::get('/', [UserController::class, 'index'])->name('index');
+Route::group(['prefix' => '/user', 'as' => 'user.'], function () {
+    Route::get('/list', [UserController::class, 'index'])->name('index');
     Route::get('/create', [UserController::class, 'create'])->name('create');
     Route::post('/', [UserController::class, 'store'])->name('store');
     Route::get('{user}/edit', [UserController::class, 'edit'])->name('edit');
