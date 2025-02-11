@@ -1,5 +1,4 @@
-@extends('layout')
-@section('title', 'Ajax CRUD')
+@extends('skeleton.layout')
 
 @section('styles')
 

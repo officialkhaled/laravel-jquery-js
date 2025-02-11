@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,10 @@ class UserController extends Controller
 {
     public function index(): View
     {
-        return view('crud.index');
+        $users = User::query()->get();
+        return view('crud.index', [
+            'users' => $users,
+        ]);
     }
 
     public function create(): View
