@@ -141,7 +141,7 @@
     @include('skeleton.header')
 </div>
 
-<div class="container vh-100">
+<div class="container">
     @yield('content')
 </div>
 
