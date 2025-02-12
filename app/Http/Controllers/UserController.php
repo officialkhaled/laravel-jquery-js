@@ -27,10 +27,10 @@ class UserController extends Controller
     {
         try {
             $request->validate([
-                'name' => 'required|string|max:255',
+                'name' => 'required|string',
                 'email' => 'required|email|unique:users,email',
-                'password' => 'required|min:6',
-                'avatar' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+                'password' => 'required',
+                'avatar' => 'nullable|image',
             ]);
 
             $user = new User();
@@ -62,28 +62,28 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         try {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required|min:6',
-                'avatar' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+            $validatedData = $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|email|unique:users,email,' . $user->id,
+                'password' => 'nullable',
+                'avatar' => 'nullable|image',
             ]);
 
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = bcrypt($request->password);
+            $user->name = $validatedData['name'];
+            $user->email = $validatedData['email'];
 
-            if ($request->avatar) {
-                $imageName = "avatars/" . time() . '.' . $request->avatar->extension();
-                $request->avatar->move(storage_path('app/public/avatars'), $imageName);
-                $user->avatar = $imageName;
+            if (!empty($validatedData['password'])) {
+                $user->password = bcrypt($validatedData['password']);
+            }
+
+            if ($request->hasFile('avatar')) {
+                $imagePath = $request->file('avatar')->store('avatars', 'public');
+                $user->avatar = $imagePath;
             }
 
             $user->save();
 
             return redirect()->route('user.index')->with('success', 'User created successfully.');
-
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->validator->errors()], 422);
         }

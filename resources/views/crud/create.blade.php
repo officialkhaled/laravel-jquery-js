@@ -76,8 +76,8 @@
                     url: "{{ route('user.store') }}",
                     type: "POST",
                     data: formData,
-                    // processData: false,
-                    // contentType: false,
+                    processData: false,
+                    contentType: false,
                     beforeSend: function () {
                         $('.text-danger').html('');
                     },

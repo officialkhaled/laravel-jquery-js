@@ -74,7 +74,7 @@
                 let formData = new FormData(this);
 
                 $.ajax({
-                    url: "{{ route('user.store') }}",
+                    url: "{{ route('user.update', $user->id) }}",
                     type: "POST",
                     data: formData,
                     processData: false,
@@ -83,8 +83,8 @@
                         $('.text-danger').html('');
                     },
                     success: function (response) {
-                        alert("User Saved Successfully!");
-                        console.log({response});
+                        alert("User Updated Successfully!");
+                        window.location.href = "{{ route('user.index') }}";
                     },
                     error: function (xhr) {
                         if (xhr.status === 422) {

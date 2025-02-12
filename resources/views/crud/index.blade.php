@@ -24,7 +24,7 @@
                             <td style="vertical-align: middle;">{{ $user->name }}</td>
                             <td style="vertical-align: middle;">{{ $user->email }}</td>
                             <td class="text-center">
-                                <img src="{{ '/storage' . asset($user->avatar) }}" alt="Image" class="object-fit-cover border rounded" width="70px">
+                                <img src="{{ $user->avatar ? '/storage' . asset($user->avatar) : asset('no_image.jpg') }}" alt="Image" class="object-fit-cover border rounded" width="70px">
                             </td>
                             <td style="vertical-align: middle;">
                                 <div class="d-flex justify-content-center gap-1">
