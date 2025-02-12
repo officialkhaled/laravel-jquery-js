@@ -5,6 +5,13 @@
 
 @section('content')
     <div class="mt-4">
+
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}STATUS
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-bordered">

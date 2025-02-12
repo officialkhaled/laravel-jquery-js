@@ -82,7 +82,7 @@
                         $('.text-danger').html('');
                     },
                     success: function (response) {
-                        alert("User Saved Successfully!");
+                        // alert("User Saved Successfully!");
                         window.location.href = "{{ route('user.index') }}";
                     },
                     error: function (xhr) {

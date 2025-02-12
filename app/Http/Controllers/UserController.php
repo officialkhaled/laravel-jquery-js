@@ -46,7 +46,7 @@ class UserController extends Controller
 
             $user->save();
 
-            return redirect()->route('user.index')->with('success', 'User created successfully.');
+            return redirect()->route('user.index')->with('success', 'User Created Successfully.');
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->validator->errors()], 422);
         }
@@ -83,7 +83,7 @@ class UserController extends Controller
 
             $user->save();
 
-            return redirect()->route('user.index')->with('success', 'User created successfully.');
+            return redirect()->route('user.index')->with('success', 'User Updated Successfully.');
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->validator->errors()], 422);
         }

@@ -83,7 +83,7 @@
                         $('.text-danger').html('');
                     },
                     success: function (response) {
-                        alert("User Updated Successfully!");
+                        // alert("User Updated Successfully!");
                         window.location.href = "{{ route('user.index') }}";
                     },
                     error: function (xhr) {
