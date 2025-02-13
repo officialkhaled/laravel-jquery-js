@@ -11,11 +11,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <span class="d-flex justify-content-center">goRMGv3</span>
+                        <span class="fw-bold">Users Table</span>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
-                            <thead class="table-info">
+                            <thead class="bg-info text-white">
                             <tr>
                                 <th width="5%" class="text-center">SL</th>
                                 <th width="25%">NAME</th>
