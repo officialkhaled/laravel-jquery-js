@@ -30,7 +30,7 @@ class UserController extends Controller
                 'name' => 'required|string',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required',
-                'avatar' => 'nullable|image',
+                'avatar' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif,svg',
             ]);
 
             $user = new User();

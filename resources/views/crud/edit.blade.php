@@ -52,10 +52,10 @@
 
             <div class="row mt-4">
                 <div class="col-md-12 d-flex justify-content-center gap-1">
-                    <button type="submit" class="btn btn-sm btn-success waves-effect bg-gradient" id="submit-btn">
+                    <button type="submit" class="btn btn-sm btn-success" id="submit-btn">
                         <i class="fa-solid fa-floppy-disk opacity-75"></i>&nbsp;&nbsp;Update
                     </button>
-                    <button type="button" class="btn btn-sm btn-warning waves-effect bg-gradient" onclick="pageRefresh()">
+                    <button type="button" class="btn btn-sm btn-warning" onclick="pageRefresh()">
                         <i class="fa-solid fa-arrows-rotate opacity-75"></i>&nbsp;&nbsp;Refresh
                     </button>
                 </div>
@@ -67,6 +67,10 @@
 @section('scripts')
     <script>
         const name = $('#name');
+        const email = $('#email');
+        const password = $('#password');
+        const avatar = $('#avatar');
+        const avatarPreview = $('#avatar_preview');
 
         $(document).ready(function () {
             $('#user-form').on("submit", function (event) {
@@ -83,16 +87,18 @@
                         $('.text-danger').html('');
                     },
                     success: function (response) {
-                        // alert("User Updated Successfully!");
-                        window.location.href = "{{ route('user.index') }}";
+                        toastr.success('User Updated Successfully!', 'Success', {timeOut: 2000});
+                        setTimeout(function () {
+                            window.location.href = "{{ route('user.index') }}";
+                        }, 1500);
                     },
                     error: function (xhr) {
                         if (xhr.status === 422) {
+                            toastr.remove();
                             let errors = xhr.responseJSON.errors;
-
                             $.each(errors, function (key, value) {
-                                let formattedKey = key.charAt(0).toUpperCase() + key.slice(1);
-                                $('.' + key + '-error').html(`The <b>${formattedKey}</b> field is required.`);
+                                $('.' + key + '-error').html(`${value[0]}`);
+                                toastr.warning(value, 'Error', {timeOut: 2000});
                             });
                         } else {
                             alert("Something went wrong! Please try again.");
@@ -101,9 +107,5 @@
                 });
             });
         });
-
-        function pageRefresh() {
-            window.location.reload();
-        }
     </script>
 @endsection
