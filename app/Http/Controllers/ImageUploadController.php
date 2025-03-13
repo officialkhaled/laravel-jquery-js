@@ -27,26 +27,21 @@ class ImageUploadController extends Controller
     {
         try {
             $request->validate([
-                'name' => 'required|string',
-                'email' => 'required|email|unique:photos,email',
-                'password' => 'required',
-                'avatar' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif,svg',
+                'title' => ['required', 'string'],
+                'image_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
-            $photo = new Photo();
-            $photo->name = $request->name;
-            $photo->email = $request->email;
-            $photo->password = bcrypt($request->password);
+            if ($request->file('image_path')) {
+                $path = $request->file('image_path')->store('uploads', 'public');
 
-            if ($request->avatar) {
-                $imageName = "avatars/" . time() . '.' . $request->avatar->extension();
-                $request->avatar->move(storage_path('app/public/avatars'), $imageName);
-                $photo->avatar = $imageName;
+                $photo = Photo::create([
+                    'image_path' => $path,
+                ]);
+
+                return response()->json(['success' => true, 'path' => $path]);
             }
 
-            $photo->save();
-
-            return redirect()->route('user.index')->with('success', 'Photo Created Successfully.');
+            return response()->json(['success' => false]);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->validator->errors()], 422);
         }
