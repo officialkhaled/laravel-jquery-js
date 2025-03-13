@@ -6,45 +6,30 @@
 
 @section('content')
     <div class="mt-4">
-        <form action="{{ route('user.store') }}" method="POST" id="user-form" enctype="multipart/form-data">
+        <form action="{{ route('user.image-upload.store') }}" method="POST" id="image-upload-form" enctype="multipart/form-data">
             @csrf
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Name">
-                        <span class="name-error text-danger"></span>
+                        <label for="title" class="form-label">Title</label>
+                        <input class="form-control" type="text" id="title" name="title" placeholder="Title">
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Email">
-                        <span class="email-error text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-                        <span class="password-error text-danger"></span>
+                        <label for="image_path" class="form-label">Image</label>
+                        <input class="form-control" type="file" id="image_path" name="image_path" onchange="previewAvatar(event)">
                     </div>
                 </div>
             </div>
-
             <div class="row mt-4">
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label for="avatar" class="form-label">Image</label>
-                        <input class="form-control" type="file" id="avatar" name="avatar" onchange="previewAvatar(event)">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group d-flex justify-content-center">
-                        <label class="form-label">&nbsp;</label>
-                        <img src="{{ asset('no_image.jpg') }}" alt="Image" id="avatar_preview"
-                             class="card card-body object-fit-cover" width="60%">
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-center">
+                        <div class="form-group" style="width: 720px;">
+                            <img src="{{ asset('no_image.jpg') }}" alt="Image" id="avatar_preview"
+                                 class="object-fit-cover" style="width: 720px; border-radius: 8px; border: solid 2px #F2F2F2;">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -65,12 +50,12 @@
         const avatarPreview = $('#avatar_preview');
 
         $(document).ready(function () {
-            $('#user-form').on("submit", function (event) {
+            $('#image-upload-form').on("submit", function (event) {
                 event.preventDefault();
                 let formData = new FormData(this);
 
                 $.ajax({
-                    url: "{{ route('user.store') }}",
+                    url: "{{ route('user.image-upload.store') }}",
                     type: "POST",
                     data: formData,
                     processData: false,
@@ -79,9 +64,9 @@
                         $('.text-danger').html('');
                     },
                     success: function (response) {
-                        toastr.success('User Updated Successfully!', 'Success', {timeOut: 2000});
+                        toastr.success('Image Uploaded Successfully!', 'Success', {timeOut: 2000});
                         setTimeout(function () {
-                            window.location.href = "{{ route('user.index') }}";
+                            window.location.href = "{{ route('user.image-upload.index') }}";
                         }, 1500);
                     },
                     error: function (xhr) {
