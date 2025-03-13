@@ -7,7 +7,7 @@
             </div>
         @endif
 
-        <div class="row">
+        <div class="row" style="height: 100vh;">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -15,7 +15,7 @@
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered">
-                            <thead class="bg-info text-white">
+                            <thead class="bg-primary text-white">
                             <tr>
                                 <th width="5%" class="text-center">SL</th>
                                 <th width="25%">NAME</th>
@@ -32,7 +32,7 @@
                                     <td style="vertical-align: middle;">{{ $user->email }}</td>
                                     <td class="text-center">
                                         <img src="{{ $user->avatar ? ('/storage' . asset($user->avatar)) : asset('no_image.jpg') }}" alt="Image"
-                                             class="object-fit-cover border rounded" width="70px">
+                                             class="object-fit-cover border rounded" width="60px" height="60px">
                                     </td>
                                     <td style="vertical-align: middle;">
                                         <div class="d-flex justify-content-center gap-1">
