@@ -50,14 +50,7 @@
             </div>
 
             <div class="row mt-4">
-                <div class="col-md-12 d-flex justify-content-center gap-1">
-                    <button type="submit" class="btn btn-sm btn-success" id="submit-btn">
-                        <i class="fa-solid fa-floppy-disk opacity-75"></i>&nbsp;&nbsp;Save
-                    </button>
-                    <button type="button" class="btn btn-sm btn-warning" onclick="pageRefresh()">
-                        <i class="fa-solid fa-arrows-rotate opacity-75"></i>&nbsp;&nbsp;Refresh
-                    </button>
-                </div>
+                @include('skeleton.components.btn-group', ['name' => 'Save', 'icon' => 'floppy-disk'])
             </div>
         </form>
     </div>

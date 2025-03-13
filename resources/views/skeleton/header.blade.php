@@ -17,6 +17,16 @@
                         <i class="fa-solid fa-plus opacity-75"></i>&nbsp;&nbsp;Create User
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('user/image-upload/list') ? 'active' : '' }} btn btn-sm btn-info waves-effect bg-gradient" href="{{ route('user.image-upload.index') }}">
+                        <i class="fa-solid fa-bars opacity-75"></i>&nbsp;&nbsp;Photos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('user/image-upload/create') ? 'active' : '' }} btn btn-sm btn-success waves-effect bg-gradient" href="{{ route('user.image-upload.create') }}">
+                        <i class="fa-solid fa-plus opacity-75"></i>&nbsp;&nbsp;Upload Image
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
